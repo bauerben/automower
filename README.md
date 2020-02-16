@@ -14,11 +14,11 @@ fully performed its series of instructions.
 
 For each mower, the program returns their final position and orientation ( X Y O )
 
-### Prerequisites
+## Prerequisites
 
 python3 is required
 
-### Input file strucuture
+## Input file strucuture
 
 In order to program the mower, we need to provide an input file constructed as follows:
 - The first line correspond to the coordinate of the upper right corner of the lawn. the bottom left
@@ -33,16 +33,16 @@ characters without spaces.
 Each mower move sequentially, meaning that the second mower moves only when the first has
 fully performed its series of instructions.
 
-### Usage
+## Usage
 
 ```raw
 $> python automower.py <input_file_path>
 ```
-### Output
+## Output
 
 For each mower, the program returns their final position and orientation ( X Y O )
 
-### Running tests
+## Running tests
 
 Unit tests and non-regression tests are included and can be run with doctest module, which is included in python's standard library.
 
