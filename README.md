@@ -44,3 +44,9 @@ For each mower, the program returns their final position and orientation ( X Y O
 
 ### Running tests
 
+Unit tests and non-regression tests are included and can be run with doctest module, which is included in python's standard library.
+
+```raw
+$> python -m doctest -v automower_doctest.txt
+```
+

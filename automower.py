@@ -46,6 +46,7 @@ class LawnMower:
         else:
             print("invalid action")
             sys.exit(1)
+        return self.x, self.y, self.direction
 
 
 def rotate_left(current_direction):
