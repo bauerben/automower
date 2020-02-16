@@ -27,27 +27,21 @@ class LawnMower:
         self.y = int(y)
         self.direction = direction
 
-    def move(self, action):
+    def move(self, action, lawnsize):
         if action == 'L':
-            # Do the thing
-            print("going left")
             new_direction = rotate_left(self.direction)
             self.direction = new_direction
         elif action == 'R':
-            # Do the thing
-            print("going right")
             new_direction = rotate_right(self.direction)
             self.direction = new_direction
         elif action == 'F':
-            # Do the thing
-            print("going forward")
-            if self.direction == 'N':
+            if self.direction == 'N' and self.y+1 <= lawnsize:
                 self.y = self.y + 1
-            if self.direction == 'W':
+            if self.direction == 'W' and self.x-1 >= 0:
                 self.x = self.x - 1
-            if self.direction == 'S':
+            if self.direction == 'S' and self.y-1 >= 0:
                 self.y = self.y - 1
-            if self.direction == 'E':
+            if self.direction == 'E' and self.x+1 <= lawnsize:
                 self.x = self.x + 1
         else:
             print("invalid action")
@@ -86,8 +80,8 @@ def parse_input_file(input_file_path):
     # Checking & retrieving lawn size
     if re.match("(^[0-9]*\s[0-9]*$)", lines[0]):
         lawn_size_line = lines[0].split()
-        x_lawn_size = lawn_size_line[0]
-        y_lawn_size = lawn_size_line[1]
+        x_lawn_size = int(lawn_size_line[0])
+        y_lawn_size = int(lawn_size_line[1])
         if x_lawn_size == y_lawn_size:
             my_garden = Lawn(x_lawn_size, y_lawn_size)
         else:
@@ -104,10 +98,9 @@ def parse_input_file(input_file_path):
     while i < len(lines):
         # Checking and retrieving lawnmower initial position
         if re.match("^[0-9]*\s[0-9]*\s(?:N|E|W|S)$", lines[i]):
-            print("Getting mower position")
             mower_position_data = lines[i].split()
-            x = mower_position_data[0]
-            y = mower_position_data[1]
+            x = int(mower_position_data[0])
+            y = int(mower_position_data[1])
             direction = mower_position_data[2]
             if my_garden.IsValidPosition(x, y):
               lawnmowers.append(LawnMower(x, y, direction))
@@ -117,7 +110,6 @@ def parse_input_file(input_file_path):
         i += 1
         # Checking and retrieving actions sequences
         if re.match("^(?:L|R|F)*$", lines[i]):
-            print("Getting mower actions")
             lawnmower_action_data = lines[i]
             actions_sequences.append(lawnmower_action_data)
         else:
@@ -133,8 +125,7 @@ def main(file_path):
     i = 0
     while i < (len(lawnmowers)):
         for action in actions_sequences[i]:
-            lawnmowers[i].move(action)
-            print(str(lawnmowers[i].x) + " " + str(lawnmowers[i].y) + " " + lawnmowers[i].direction)
+            lawnmowers[i].move(action, my_garden.xsize)
         print(str(lawnmowers[i].x)+" "+str(lawnmowers[i].y)+" "+lawnmowers[i].direction)
         i += 1
 
